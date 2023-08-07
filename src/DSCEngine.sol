@@ -198,4 +198,11 @@ contract DSCEngine is ReentrancyGuard {
         }
         return totalCollateralValueInUsd;
     }
+
+    function getUsdValue(
+        address token,
+        uint256 amount // in WEI
+    ) external view returns (uint256) {
+        return _getUsdValue(token, amount);
+    }
 }
