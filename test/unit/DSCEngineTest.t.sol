@@ -486,71 +486,53 @@ contract DSCEngineTest is StdCheats, Test {
     ///////////////////////////////////
     // View & Pure Function Tests
     //////////////////////////////////
-    // function testGetCollateralTokenPriceFeed() public {
-    //     address priceFeed = dsce.getCollateralTokenPriceFeed(weth);
-    //     assertEq(priceFeed, ethUsdPriceFeed);
-    // }
+    function testGetCollateralTokenPriceFeed() public {
+        address priceFeed = dsce.getCollateralTokenPriceFeed(weth);
+        assertEq(priceFeed, ethUsdPriceFeed);
+    }
 
-    // function testGetCollateralTokens() public {
-    //     address[] memory collateralTokens = dsce.getCollateralTokens();
-    //     assertEq(collateralTokens[0], weth);
-    // }
+    function testGetCollateralTokens() public {
+        address[] memory collateralTokens = dsce.getCollateralTokens();
+        assertEq(collateralTokens[0], weth);
+    }
 
-    // function testGetMinHealthFactor() public {
-    //     uint256 minHealthFactor = dsce.getMinHealthFactor();
-    //     assertEq(minHealthFactor, MIN_HEALTH_FACTOR);
-    // }
+    function testGetMinHealthFactor() public {
+        uint256 minHealthFactor = dsce.getMinHealthFactor();
+        assertEq(minHealthFactor, MIN_HEALTH_FACTOR);
+    }
 
-    // function testGetLiquidationThreshold() public {
-    //     uint256 liquidationThreshold = dsce.getLiquidationThreshold();
-    //     assertEq(liquidationThreshold, LIQUIDATION_THRESHOLD);
-    // }
+    function testGetLiquidationThreshold() public {
+        uint256 liquidationThreshold = dsce.getLiquidationThreshold();
+        assertEq(liquidationThreshold, LIQUIDATION_THRESHOLD);
+    }
 
-    // function testGetAccountCollateralValueFromInformation() public depositedCollateral {
-    //     (, uint256 collateralValue) = dsce.getAccountInformation(user);
-    //     uint256 expectedCollateralValue = dsce.getUsdValue(weth, AMOUNT_COLLATERAL);
-    //     assertEq(collateralValue, expectedCollateralValue);
-    // }
+    function testGetAccountCollateralValueFromInformation() public depositedCollateral {
+        (, uint256 collateralValue) = dsce.getAccountInformation(user);
+        uint256 expectedCollateralValue = dsce.getUsdValue(weth, AMOUNT_COLLATERAL);
+        assertEq(collateralValue, expectedCollateralValue);
+    }
 
-    // function testGetCollateralBalanceOfUser() public {
-    //     vm.startPrank(user);
-    //     ERC20Mock(weth).approve(address(dsce), AMOUNT_COLLATERAL);
-    //     dsce.depositCollateral(weth, AMOUNT_COLLATERAL);
-    //     vm.stopPrank();
-    //     uint256 collateralBalance = dsce.getCollateralBalanceOfUser(user, weth);
-    //     assertEq(collateralBalance, AMOUNT_COLLATERAL);
-    // }
+    function testGetCollateralBalanceOfUser() public {
+        vm.startPrank(user);
+        ERC20Mock(weth).approve(address(dsce), AMOUNT_COLLATERAL);
+        dsce.depositCollateral(weth, AMOUNT_COLLATERAL);
+        vm.stopPrank();
+        uint256 collateralBalance = dsce.getCollateralBalanceOfUser(user, weth);
+        assertEq(collateralBalance, AMOUNT_COLLATERAL);
+    }
 
-    // function testGetAccountCollateralValue() public {
-    //     vm.startPrank(user);
-    //     ERC20Mock(weth).approve(address(dsce), AMOUNT_COLLATERAL);
-    //     dsce.depositCollateral(weth, AMOUNT_COLLATERAL);
-    //     vm.stopPrank();
-    //     uint256 collateralValue = dsce.getAccountCollateralValue(user);
-    //     uint256 expectedCollateralValue = dsce.getUsdValue(weth, AMOUNT_COLLATERAL);
-    //     assertEq(collateralValue, expectedCollateralValue);
-    // }
+    function testGetAccountCollateralValue() public {
+        vm.startPrank(user);
+        ERC20Mock(weth).approve(address(dsce), AMOUNT_COLLATERAL);
+        dsce.depositCollateral(weth, AMOUNT_COLLATERAL);
+        vm.stopPrank();
+        uint256 collateralValue = dsce.getAccountCollateralValue(user);
+        uint256 expectedCollateralValue = dsce.getUsdValue(weth, AMOUNT_COLLATERAL);
+        assertEq(collateralValue, expectedCollateralValue);
+    }
 
-    // function testGetDsc() public {
-    //     address dscAddress = dsce.getDsc();
-    //     assertEq(dscAddress, address(dsc));
-    // }
-
-    // How do we adjust our invariant tests for this?
-    // function testInvariantBreaks() public depositedCollateralAndMintedDsc {
-    //     MockV3Aggregator(ethUsdPriceFeed).updateAnswer(0);
-
-    //     uint256 totalSupply = dsc.totalSupply();
-    //     uint256 wethDeposted = ERC20Mock(weth).balanceOf(address(dsce));
-    //     uint256 wbtcDeposited = ERC20Mock(wbtc).balanceOf(address(dsce));
-
-    //     uint256 wethValue = dsce.getUsdValue(weth, wethDeposted);
-    //     uint256 wbtcValue = dsce.getUsdValue(wbtc, wbtcDeposited);
-
-    //     console.log("wethValue: %s", wethValue);
-    //     console.log("wbtcValue: %s", wbtcValue);
-    //     console.log("totalSupply: %s", totalSupply);
-
-    //     assert(wethValue + wbtcValue >= totalSupply);
-    // }
+    function testGetDsc() public {
+        address dscAddress = dsce.getDsc();
+        assertEq(dscAddress, address(dsc));
+    }
 }
