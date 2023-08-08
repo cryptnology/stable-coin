@@ -39,7 +39,7 @@ contract StopOnRevertHandler is Test {
     }
 
     ///////////////
-    // DSCEngine //
+    // DSCEngine
     ///////////////
     function mintAndDepositCollateral(uint256 collateralSeed, uint256 amountCollateral) public {
         // must be more than 0
@@ -85,7 +85,7 @@ contract StopOnRevertHandler is Test {
     }
 
     /////////////////////////////
-    // DecentralizedStableCoin //
+    // DecentralizedStableCoin
     /////////////////////////////
     function transferDsc(uint256 amountDsc, address to) public {
         if (to == address(0)) {
@@ -97,7 +97,7 @@ contract StopOnRevertHandler is Test {
     }
 
     /////////////////////////////
-    // Aggregator //
+    // Aggregator
     /////////////////////////////
     function updateCollateralPrice(uint96 newPrice, uint256 collateralSeed) public {
         int256 intNewPrice = int256(uint256(newPrice));
