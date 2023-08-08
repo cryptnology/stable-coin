@@ -450,38 +450,38 @@ contract DSCEngineTest is StdCheats, Test {
         _;
     }
 
-    // function testLiquidationPayoutIsCorrect() public liquidated {
-    //     uint256 liquidatorWethBalance = ERC20Mock(weth).balanceOf(liquidator);
-    //     uint256 expectedWeth = dsce.getTokenAmountFromUsd(weth, AMOUNT_TO_MINT)
-    //         + (dsce.getTokenAmountFromUsd(weth, AMOUNT_TO_MINT) / dsce.getLiquidationBonus());
-    //     uint256 hardCodedExpected = 6111111111111111110;
-    //     assertEq(liquidatorWethBalance, hardCodedExpected);
-    //     assertEq(liquidatorWethBalance, expectedWeth);
-    // }
+    function testLiquidationPayoutIsCorrect() public liquidated {
+        uint256 liquidatorWethBalance = ERC20Mock(weth).balanceOf(liquidator);
+        uint256 expectedWeth = dsce.getTokenAmountFromUsd(weth, AMOUNT_TO_MINT)
+            + (dsce.getTokenAmountFromUsd(weth, AMOUNT_TO_MINT) / dsce.getLiquidationBonus());
+        uint256 hardCodedExpected = 6111111111111111110;
+        assertEq(liquidatorWethBalance, hardCodedExpected);
+        assertEq(liquidatorWethBalance, expectedWeth);
+    }
 
-    // function testUserStillHasSomeEthAfterLiquidation() public liquidated {
-    //     // Get how much WETH the user lost
-    //     uint256 amountLiquidated = dsce.getTokenAmountFromUsd(weth, AMOUNT_TO_MINT)
-    //         + (dsce.getTokenAmountFromUsd(weth, AMOUNT_TO_MINT) / dsce.getLiquidationBonus());
+    function testUserStillHasSomeEthAfterLiquidation() public liquidated {
+        // Get how much WETH the user lost
+        uint256 amountLiquidated = dsce.getTokenAmountFromUsd(weth, AMOUNT_TO_MINT)
+            + (dsce.getTokenAmountFromUsd(weth, AMOUNT_TO_MINT) / dsce.getLiquidationBonus());
 
-    //     uint256 usdAmountLiquidated = dsce.getUsdValue(weth, amountLiquidated);
-    //     uint256 expectedUserCollateralValueInUsd = dsce.getUsdValue(weth, AMOUNT_COLLATERAL) - (usdAmountLiquidated);
+        uint256 usdAmountLiquidated = dsce.getUsdValue(weth, amountLiquidated);
+        uint256 expectedUserCollateralValueInUsd = dsce.getUsdValue(weth, AMOUNT_COLLATERAL) - (usdAmountLiquidated);
 
-    //     (, uint256 userCollateralValueInUsd) = dsce.getAccountInformation(user);
-    //     uint256 hardCodedExpectedValue = 70000000000000000020;
-    //     assertEq(userCollateralValueInUsd, expectedUserCollateralValueInUsd);
-    //     assertEq(userCollateralValueInUsd, hardCodedExpectedValue);
-    // }
+        (, uint256 userCollateralValueInUsd) = dsce.getAccountInformation(user);
+        uint256 hardCodedExpectedValue = 70000000000000000020;
+        assertEq(userCollateralValueInUsd, expectedUserCollateralValueInUsd);
+        assertEq(userCollateralValueInUsd, hardCodedExpectedValue);
+    }
 
-    // function testLiquidatorTakesOnUsersDebt() public liquidated {
-    //     (uint256 liquidatorDscMinted,) = dsce.getAccountInformation(liquidator);
-    //     assertEq(liquidatorDscMinted, AMOUNT_TO_MINT);
-    // }
+    function testLiquidatorTakesOnUsersDebt() public liquidated {
+        (uint256 liquidatorDscMinted,) = dsce.getAccountInformation(liquidator);
+        assertEq(liquidatorDscMinted, AMOUNT_TO_MINT);
+    }
 
-    // function testUserHasNoMoreDebt() public liquidated {
-    //     (uint256 userDscMinted,) = dsce.getAccountInformation(user);
-    //     assertEq(userDscMinted, 0);
-    // }
+    function testUserHasNoMoreDebt() public liquidated {
+        (uint256 userDscMinted,) = dsce.getAccountInformation(user);
+        assertEq(userDscMinted, 0);
+    }
 
     ///////////////////////////////////
     // View & Pure Function Tests
